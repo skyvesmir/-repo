@@ -63,12 +63,12 @@ def touched_excluded(calls, excluded, files):
         q = args_of(c).get("query", "")
         for ex in excluded:
             if re.search(r"parentId\s*=\s*'" + re.escape(ex) + "'", q):
-                bad.append(f"query lists excluded folder: {q[:80]}")
+                bad.append(f"除外フォルダを列挙する検索: {q[:80]}")
         if c["tool"] in READ_TOOLS:
             fid = args_of(c).get("fileId")
             f = files.get(fid)
             if f and f["parentId"] in excluded:
-                bad.append(f"read file inside excluded folder: {f['title']}")
+                bad.append(f"除外フォルダ内のファイルを取得: {f['title']}")
     return bad
 
 
