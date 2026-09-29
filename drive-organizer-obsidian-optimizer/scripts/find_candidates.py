@@ -7,13 +7,17 @@
     python3 find_candidates.py inventory.tsv [--me you@example.com] [--json]
 
 TSV（1 行目はヘッダー、タブ区切り、引用符なし）。インベントリが 300 件を超えるときだけ作り、下の列だけを書く:
-    必須: id, title, mimeType（略さない）, size（fileSize。なければ空）, modifiedTime, parentId
+    必須: id, title, mimeType, size（fileSize。なければ空）, modifiedTime, parentId
     任意: createdTime, path（組み立てたパス。出力が読みやすくなる）, owner
     id と parentId は、重ならない範囲で先頭 10 文字程度に縮めてよい。
+    mimeType は短く書いてよい: Drive 外の形式は拡張子と同じ語（pdf, docx, md, jpg など）、
+    Google 形式は gdoc, gsheet, gslides, gform, gdraw、フォルダは folder、ショートカットは shortcut。
+    1 つの TSV の中では、短い書き方と MIME をそのまま書く方法のどちらかにそろえる（混ぜると S・Z が一致しない）。
 
 候補の種類:
     S  同じ MIME・サイズ・更新日時（同じ元ファイルのコピーの可能性が高い）
-    N  正規化した名前が同じ（同じフォルダ内も含む）。Drive 外の形式でサイズがすべて違うものは「弱い N」として名前だけ出す
+    N  正規化した名前が同じ（同じフォルダ内も含む）。Drive 外の形式でサイズがすべて違うものと、
+       Google 形式だけで 4 件以上がすべて別のフォルダにあるもの（案件ごとの「議事録」など定型の名前）は、「弱い N」として名前だけ出す
     V  コピー・版・派生の印を除くと同じ基本名
     P  同じフォルダで名前が非常に近い（数字だけの違いは連番として除く）
     Z  同じ MIME・サイズ（1KB 以上）で名前が違う
@@ -36,6 +40,15 @@ NATIVE_PREFIX = "application/vnd.google-apps."
 FOLDER = "application/vnd.google-apps.folder"
 SHORTCUT = "application/vnd.google-apps.shortcut"
 REQUIRED = ("id", "title", "mimeType", "size", "modifiedTime", "parentId")
+# mimeType の短い書き方（転記の量を減らすため）。ここにない語は「ext/語」として、Drive 外の形式の種類に使う
+SHORT_MIME = {
+    "folder": FOLDER, "shortcut": SHORTCUT,
+    "gdoc": NATIVE_PREFIX + "document", "gsheet": NATIVE_PREFIX + "spreadsheet",
+    "gslides": NATIVE_PREFIX + "presentation", "gform": NATIVE_PREFIX + "form",
+    "gdraw": NATIVE_PREFIX + "drawing",
+}
+# 同じ名前の Google 形式がこの件数以上あり、すべて別のフォルダにあれば、定型の名前とみなして弱い N にする
+NATIVE_SERIES_MIN = 4
 
 # 版・状態を表す語。区切り（空白・_・-）の後ろか、括弧の中にあるときだけ印とみなす。
 VERSION_WORDS = (
@@ -91,6 +104,14 @@ def normalize(text):
     return re.sub(r"\s+", " ", text).strip()
 
 
+def expand_mime(value):
+    """短い書き方の mimeType を、判定に使う形に直す。「/」を含む値（MIME そのもの）は変えない。"""
+    value = value.strip()
+    if "/" in value:
+        return value
+    return SHORT_MIME.get(value.lower(), "ext/" + value.lower())
+
+
 def split_ext(title, mime):
     """Drive 外から来たファイルだけ拡張子を分ける（ネイティブ形式は拡張子を持たない）。"""
     if not mime.startswith(NATIVE_PREFIX):
@@ -133,7 +154,9 @@ def load(path):
         if len(cells) != len(header):
             broken.append(n)
             continue
-        rows.append(dict(zip(header, cells)))
+        row = dict(zip(header, cells))
+        row["mimeType"] = expand_mime(row["mimeType"])
+        rows.append(row)
     if broken:
         print(f"警告: 列数が合わない行を {len(broken)} 行とばしました（行番号: {broken[:10]}）", file=sys.stderr)
     return [r for r in rows if r["mimeType"] != FOLDER], len(broken)
@@ -229,8 +252,11 @@ def find(rows, me=None):
         if len(names) > 1 and not all(m["id"] in s_ids for m in g):
             groups["Z"].append(g)
 
-    # N のうち、Drive 外の形式ですべてサイズが違うものは別内容の可能性が高いので「弱い N」に分ける
+    # N のうち、別内容の可能性が高いものを「弱い N」に分ける:
+    # Drive 外の形式ですべてサイズが違うもの、Google 形式だけで多数がすべて別のフォルダにあるもの（定型の名前）
     def weak(g):
+        if all(m["mimeType"].startswith(NATIVE_PREFIX) for m in g):
+            return len(g) >= NATIVE_SERIES_MIN and len({m["parentId"] for m in g}) == len(g)
         if any(m["mimeType"].startswith(NATIVE_PREFIX) for m in g):
             return False
         sizes = [m.get("size") for m in g]
@@ -315,7 +341,7 @@ def render_markdown(groups, folder_dups, naming, empty, others, markers, total, 
         out.append(f"- 読み込めなかった行: {broken} 件（TSV を確認すること）")
     for key in "SNVPZ":
         out.append(f"- {GROUP_TITLES[key]}: {len(groups[key])} グループ")
-    out.append(f"- N（弱）: 同じ名前だがサイズがすべて違う: {len(groups['N_weak'])} グループ（名前だけ列挙）")
+    out.append(f"- N（弱）: 同じ名前だがサイズがすべて違う、または定型の名前の Google 形式: {len(groups['N_weak'])} グループ（名前だけ列挙）")
     out.append(f"- F: フォルダ複製の疑い: {len(folder_dups)} 組")
     out.append(f"- T: 同じ語を名前に含むまとまり: {len(groups['T'])} 語（上位のみ。重複の候補ではない）")
     out.append(f"- L: 命名の問題: {len(naming)} 件")
@@ -344,7 +370,7 @@ def render_markdown(groups, folder_dups, naming, empty, others, markers, total, 
             more = f" ほか {len(members) - MAX_GROUP_LISTED} 件" if len(members) > MAX_GROUP_LISTED else ""
             out.append(f"- 「{tok}」: {len(members)} 件・{folders} フォルダ — {names}{more}")
     if groups["N_weak"]:
-        out += ["", "## N（弱）: 同じ名前だがサイズがすべて違う（別内容の可能性が高い。重複として扱わない）"]
+        out += ["", "## N（弱）: 同じ名前だがサイズがすべて違う、または定型の名前の Google 形式（別内容の可能性が高い。重複として扱わない）"]
         out += [f"- {g[0]['title']} × {len(g)}" for g in groups["N_weak"]]
     if naming:
         out += ["", "## L: 命名の問題"]

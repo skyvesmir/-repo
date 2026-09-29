@@ -175,9 +175,9 @@ def write_call_summary(run, calls, m):
         a = c["args"] if isinstance(c["args"], dict) else {}
         brief = {k: v for k, v in a.items() if k != "textContent"}
         if "textContent" in a:
-            brief["textContent"] = f"<{len(a['textContent'])} chars>"
+            brief["textContent"] = f"<{len(a['textContent'])} 文字>"
         text = json.dumps(brief, ensure_ascii=False).replace("|", "\\|")
-        lines.append(f"| {i} | {c['tool']} | {text[:160]} | {'ok' if c['ok'] else 'error'} | {c.get('response_chars', 0):,} |")
+        lines.append(f"| {i} | {c['tool']} | {text[:160]} | {'成功' if c['ok'] else 'エラー'} | {c.get('response_chars', 0):,} |")
     (run / "outputs" / "call_summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
@@ -197,8 +197,9 @@ def main():
                                                              ensure_ascii=False, indent=2), encoding="utf-8")
             write_call_summary(run, calls, m)
             passed = sum(r["passed"] for r in results)
-            print(f"{name}/{run.name}: obj {passed}/{len(results)} | calls {m['total_tool_calls']} | "
-                  f"reads {m['distinct_content_reads']} | resp_chars {m['response_chars_total']} | lean {m['lean_listing_ratio']}")
+            print(f"{name}/{run.name}: 機械採点 {passed}/{len(results)} | 呼び出し {m['total_tool_calls']} | "
+                  f"本文取得 {m['distinct_content_reads']} | 応答の文字数 {m['response_chars_total']} | "
+                  f"抜粋を絞った一覧の割合 {m['lean_listing_ratio']}")
 
 
 if __name__ == "__main__":

@@ -13,7 +13,7 @@
 ## 2. 差分の調べ方
 
 - **基準時刻**: 前回の状態ブロックの `last_scan`（前回の実行を開始した時刻）。今回の実行を開始した時刻を最初に控え、今回のログの `last_scan` にする（実行中に作られたファイルを次回に取りこぼさないため）。
-- **差分の検索**: `owner = 'me' and (modifiedTime > '前回の last_scan' or createdTime > '前回の last_scan')`（`excludeContentSnippets: true`、pageSize 30）。アップロードされたファイルは元の更新日時を保つので、`createdTime` も条件に入れる。
+- **差分の検索**: `owner = 'me' and (modifiedTime > '前回の last_scan' or createdTime > '前回の last_scan')`（`excludeContentSnippets: true`、pageSize 30）。アップロードされたファイルは元の更新日時を保つので、`createdTime` も条件に入れる。`owner = 'me'` なので、他人がオーナーのファイル（共有フォルダ内のものなど）の変化は拾えない。このことを報告の制約に書く。
 - **範囲の判定**: 結果の `parentId` が、状態ブロックの `scope`・`vaults` のフォルダか、この実行で既にわかったフォルダかを確かめる。わからなければ `get_file_metadata` で親を 1 段ずつたどる。未知の親が多いときは、`scope` のフォルダの子を OR でまとめて 1 回取る方が安い。たどった結果は実行中に覚えておく。`excluded_folders` とログ用フォルダの中のものは除く。
 - **規約**: 状態ブロックの `conventions` を再利用し、集計し直さない。規約のない種類のフォルダに新しいノートが増えたときだけ集計する。
 - **優先して扱うもの**:
