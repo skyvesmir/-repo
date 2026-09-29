@@ -6,9 +6,10 @@
 使い方:
     python3 find_candidates.py inventory.tsv [--me you@example.com] [--json]
 
-TSV（1 行目はヘッダー、タブ区切り、引用符なし）:
-    必須: id, title, mimeType, size, modifiedTime, parentId
-    任意: createdTime, path, owner
+TSV（1 行目はヘッダー、タブ区切り、引用符なし）。インベントリが 300 件を超えるときだけ作り、下の列だけを書く:
+    必須: id, title, mimeType（略さない）, size（fileSize。なければ空）, modifiedTime, parentId
+    任意: createdTime, path（組み立てたパス。出力が読みやすくなる）, owner
+    id と parentId は、重ならない範囲で先頭 10 文字程度に縮めてよい。
 
 候補の種類:
     S  同じ MIME・サイズ・更新日時（同じ元ファイルのコピーの可能性が高い）
@@ -238,12 +239,15 @@ def find(rows, me=None):
     groups["N_weak"] = [g for g in groups["N"] if weak(g)]
     groups["N"] = [g for g in groups["N"] if not weak(g)]
 
-    # F: 同じ 2 フォルダの間に、内容も同じらしい組（S、またはサイズも同じ N）が多数ある
+    # F: 同じ 2 フォルダの間に、内容も同じらしい組（S、またはサイズも同じ N。ネイティブ形式は除く）が多数ある
     folder_pairs = defaultdict(int)
     for g in groups["S"] + groups["N"]:
         seen = set()
         for a, b in combinations(g, 2):
             if a.get("size") != b.get("size") or not a.get("size"):
+                continue
+            # ネイティブ形式のサイズは本文量と対応しないので、同じサイズでも根拠にしない
+            if a["mimeType"].startswith(NATIVE_PREFIX) or b["mimeType"].startswith(NATIVE_PREFIX):
                 continue
             if a["parentId"] != b["parentId"]:
                 key = tuple(sorted((a["parentId"], b["parentId"])))
@@ -357,7 +361,7 @@ def render_markdown(groups, folder_dups, naming, empty, others, markers, total, 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("inventory", help="インベントリ TSV")
-    parser.add_argument("--me", help="自分のメールアドレス（検索結果の owner と同じ形式）")
+    parser.add_argument("--me", help="自分のメールアドレス（owner = 'me' で検索した結果の owner の値）。他人がオーナーのファイルに印を付ける")
     parser.add_argument("--json", action="store_true", help="JSON で出力する")
     args = parser.parse_args()
 
