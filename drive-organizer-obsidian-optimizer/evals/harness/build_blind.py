@@ -3,11 +3,15 @@
 
 iteration-1 の Skill あり・なしと、iteration-3（最終版）の Skill ありの 3 本を、評価ごとに run_A/B/C へ無作為に割り当てる。
 採点者に構成が分からないよう、回答中の Skill への言及（「SKILL.md」「§4-3」など）だけを除く。原本は変えない。
+
+使い方: python3 build_blind.py [対応表の保存先]
+対応表は、採点者が読める場所（作業領域）の外に置く。省略時は作業領域の直下。
 """
 import json
 import random
 import re
 import shutil
+import sys
 from pathlib import Path
 
 WS = Path("/home/user/-repo/drive-organizer-obsidian-optimizer-workspace")
@@ -49,8 +53,9 @@ def main():
             (dst / "response.md").write_text(scrub((src / "response.md").read_text(encoding="utf-8")), encoding="utf-8")
             shutil.copy(src / "call_summary.md", dst / "call_summary.md")
             mapping[f"{ev}/{label}"] = f"{it}/{cfg}"
-    MAP.write_text(json.dumps(mapping, ensure_ascii=False, indent=1), encoding="utf-8")
-    print("パケットを作成しました:", OUT)
+    out = Path(sys.argv[1]) if len(sys.argv) > 1 else MAP
+    out.write_text(json.dumps(mapping, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("パケットを作成しました:", OUT, "／対応表:", out)
 
 
 if __name__ == "__main__":
