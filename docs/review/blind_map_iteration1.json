@@ -1,0 +1,10 @@
+{
+ "creative-plan/run_A": "with_skill",
+ "creative-plan/run_B": "without_skill",
+ "large-dup-survey/run_A": "without_skill",
+ "large-dup-survey/run_B": "with_skill",
+ "scheduled-incremental/run_A": "with_skill",
+ "scheduled-incremental/run_B": "without_skill",
+ "approved-execution/run_A": "without_skill",
+ "approved-execution/run_B": "with_skill"
+}

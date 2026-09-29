@@ -6,45 +6,67 @@
 使い方:
     python3 find_candidates.py inventory.tsv [--me you@example.com] [--json]
 
-TSV（1 行目はヘッダー、タブ区切り）:
+TSV（1 行目はヘッダー、タブ区切り、引用符なし）:
     必須: id, title, mimeType, size, modifiedTime, parentId
     任意: createdTime, path, owner
+
+候補の種類:
+    S  同じ MIME・サイズ・更新日時（同じ元ファイルのコピーの可能性が高い）
+    N  正規化した名前が同じ（同じフォルダ内も含む）。Drive 外の形式でサイズがすべて違うものは「弱い N」として名前だけ出す
+    V  コピー・版・派生の印を除くと同じ基本名
+    P  同じフォルダで名前が非常に近い（数字だけの違いは連番として除く）
+    Z  同じ MIME・サイズ（1KB 以上）で名前が違う
+    F  フォルダ複製の疑い（同じ 2 フォルダの間に、サイズも同じ S/N の組が多数）
+    L  命名の問題
+    X  空のファイル（0 バイト）
 """
 
 import argparse
-import csv
+import difflib
 import json
 import re
 import sys
 import unicodedata
 from collections import defaultdict
+from itertools import combinations
 
 NATIVE_PREFIX = "application/vnd.google-apps."
 FOLDER = "application/vnd.google-apps.folder"
 SHORTCUT = "application/vnd.google-apps.shortcut"
+REQUIRED = ("id", "title", "mimeType", "size", "modifiedTime", "parentId")
 
-# 1 回の置換で取り除く「コピーの印」。基本名が空になる置換は採用しない。
-COPY_MARKERS = [
-    r"^copy of\s+",
-    r"^コピー\s*[-－~〜]?\s*",
-    r"\s*の\s*コピー$",
-    r"\s*[-－]\s*コピー$",
-    r"[\s_-]*\(\d+\)$",
-    r"[\s_-]*（\d+）$",
-    r"[\s_-]+copy(\s*\d+)?$",
-]
+# 版・状態を表す語。区切り（空白・_・-）の後ろか、括弧の中にあるときだけ印とみなす。
 VERSION_WORDS = (
-    r"(最終版|最新版|最終稿|完成版|確定版|改訂版|修正版|決定版|最終|最新|新規|旧版|"
-    r"final|latest|new|old)"
+    r"最終版|最新版|最終稿|完成版|確定版|改訂版|修正版|決定版|旧版|最終|最新|新規|"
+    r"final|latest|new|old"
 )
-VERSION_MARKERS = [
-    r"[\s_-]*" + VERSION_WORDS + r"[\s_-]*\d*$",
-    r"^" + VERSION_WORDS + r"[\s_-]+",
-    r"[\s_-]*v(er)?\.?\d+(\.\d+)*$",
+# 区切りなしで名前に直接付いていても印とみなす語（「企画書最終版」など）。
+ATTACHED_WORDS = r"最終版|最新版|最終稿|完成版|確定版|改訂版|修正版|決定版|旧版"
+# 派生を表す語（原本と派生の候補になる）。
+DERIVED_WORDS = r"要約|抜粋|あらすじ|圧縮版|圧縮|英語版|英訳|和訳|翻訳|書き出し|エクスポート|summary|excerpt|export"
+SEP = r"[\s_\-－・]+"
+OPEN, CLOSE = r"[（(【\[]", r"[）)】\]]"
+
+MARKERS = [
+    ("コピー", r"^copy of\s+"),
+    ("コピー", r"^コピー\s*[-－~〜]?\s*"),
+    ("コピー", r"\s*の\s*コピー$"),
+    ("コピー", r"\s*[-－]\s*コピー$"),
+    ("コピー番号", r"\s*\(\d+\)$"),
+    ("コピー番号", r"\s*（\d+）$"),
+    ("コピー", SEP + r"copy(\s*\d+)?$"),
+    ("版", r"\s*" + OPEN + r"\s*(" + VERSION_WORDS + r"|コピー|copy|v\d+(\.\d+)*)\s*\d*\s*" + CLOSE + r"$"),
+    ("版", r"^" + OPEN + r"\s*(" + VERSION_WORDS + r")\s*" + CLOSE + r"\s*"),
+    ("版", SEP + r"(" + VERSION_WORDS + r")\s*\d*$"),
+    ("版", r"(?<=\S)(" + ATTACHED_WORDS + r")\d*$"),
+    ("版", r"^(" + VERSION_WORDS + r")" + SEP),
+    ("版番号", SEP + r"v(er)?\.?\d+(\.\d+)*$"),
+    ("派生", r"\s*" + OPEN + r"\s*(" + DERIVED_WORDS + r")\s*" + CLOSE + r"$"),
+    ("派生", SEP + r"(" + DERIVED_WORDS + r")$"),
 ]
-# 命名の問題として印を付ける語（new/old は一般的な英単語でもあるため、ここでは対象にしない）
 TIME_RELATIVE = re.compile(
-    r"(最終版|最新版|最終稿|完成版|確定版|改訂版|修正版|決定版|最終|最新|新規|旧版|final|latest|copy|コピー)",
+    r"(" + ATTACHED_WORDS + r")|\b(final|latest|copy)\b|のコピー|^コピー|" + SEP + r"(最終|最新|新規)$|"
+    + OPEN + r"\s*(最終|最新|新規|new)\s*" + CLOSE,
     re.IGNORECASE,
 )
 UNTITLED = re.compile(r"^(無題|untitled)", re.IGNORECASE)
@@ -53,6 +75,9 @@ OBSIDIAN_BAD = set('#^[]|\\/:*?"<>')
 LONG_NAME = 60
 MIN_SIZE_FOR_SIZE_MATCH = 1024
 MAX_GROUP_LISTED = 10
+SIMILARITY = 0.85
+MAX_FOLDER_FOR_SIMILARITY = 400
+FOLDER_DUP_MIN_PAIRS = 5
 
 
 def normalize(text):
@@ -70,29 +95,42 @@ def split_ext(title, mime):
 
 
 def strip_markers(base):
-    """印を取り除いた基本名と、取り除いた印の有無を返す。"""
+    """印を取り除いた基本名と、取り除いた印の種類を返す。"""
     current = normalize(base)
-    changed = False
+    found = []
     for _ in range(4):
         before = current
-        for pattern in COPY_MARKERS + VERSION_MARKERS:
-            candidate = re.sub(pattern, "", current, flags=re.IGNORECASE).strip()
+        for kind, pattern in MARKERS:
+            candidate = re.sub(pattern, "", current, flags=re.IGNORECASE).strip(" _-－・")
             if candidate and candidate != current:
                 current = candidate
+                found.append(kind)
         if current == before:
             break
-        changed = True
-    return current, changed
+    return current, found
 
 
 def load(path):
     with open(path, encoding="utf-8", newline="") as f:
-        rows = list(csv.DictReader(f, delimiter="\t"))
-    required = {"id", "title", "mimeType", "size", "modifiedTime", "parentId"}
-    missing = required - set(rows[0].keys() if rows else required)
+        lines = f.read().splitlines()
+    if not lines:
+        sys.exit("TSV が空です")
+    header = lines[0].split("\t")
+    missing = [c for c in REQUIRED if c not in header]
     if missing:
-        sys.exit(f"TSV に必須列がありません: {', '.join(sorted(missing))}")
-    return [r for r in rows if r.get("mimeType") not in (FOLDER,)]
+        sys.exit(f"TSV に必須列がありません: {', '.join(missing)}")
+    rows, broken = [], []
+    for n, line in enumerate(lines[1:], start=2):
+        if not line.strip():
+            continue
+        cells = line.split("\t")
+        if len(cells) != len(header):
+            broken.append(n)
+            continue
+        rows.append(dict(zip(header, cells)))
+    if broken:
+        print(f"警告: 列数が合わない行を {len(broken)} 行とばしました（行番号: {broken[:10]}）", file=sys.stderr)
+    return [r for r in rows if r["mimeType"] != FOLDER], len(broken)
 
 
 def label(row):
@@ -101,65 +139,105 @@ def label(row):
     return f"{row['title']} | {where} | {size} B | mod {row['modifiedTime']} | id {row['id']}"
 
 
+def group_by(rows, key):
+    out = defaultdict(list)
+    for r in rows:
+        out[key(r)].append(r)
+    return [g for g in out.values() if len(g) > 1]
+
+
+def union_groups(pairs):
+    parent = {}
+
+    def root(x):
+        parent.setdefault(x, x)
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    for a, b in pairs:
+        parent[root(a)] = root(b)
+    groups = defaultdict(set)
+    for x in list(parent):
+        groups[root(x)].add(x)
+    return list(groups.values())
+
+
 def find(rows, me=None):
-    groups = {"S": [], "N": [], "V": [], "Z": []}
-    naming = []
-    empty = []
-    others = []
+    by_id = {r["id"]: r for r in rows}
+    real = [r for r in rows if r["mimeType"] != SHORTCUT]
+    comparable = [r for r in real if not r["mimeType"].startswith(NATIVE_PREFIX)
+                  and r.get("size", "").isdigit() and int(r["size"]) > 0]
 
-    comparable = [
-        r for r in rows
-        if not r["mimeType"].startswith(NATIVE_PREFIX) and (r.get("size") or "0").isdigit()
-        and int(r.get("size") or 0) > 0
-    ]
+    groups = {}
+    groups["S"] = group_by(comparable, lambda r: (r["mimeType"], r["size"], r["modifiedTime"]))
+    groups["N"] = group_by(real, lambda r: normalize(r["title"]))
 
-    # S: 同じ MIME・同じサイズ・同じ更新日時
-    by_smt = defaultdict(list)
-    for r in comparable:
-        by_smt[(r["mimeType"], r["size"], r["modifiedTime"])].append(r)
-    s_ids = set()
-    for members in by_smt.values():
-        if len(members) > 1:
-            groups["S"].append(members)
-            s_ids.update(m["id"] for m in members)
-
-    # N: 正規化した名前が同じで、フォルダが違う（同じフォルダ内の同名も含める）
-    by_name = defaultdict(list)
-    for r in rows:
-        if r["mimeType"] != SHORTCUT:
-            by_name[normalize(r["title"])].append(r)
-    for members in by_name.values():
-        if len(members) > 1:
-            groups["N"].append(members)
-
-    # V: 印を除いた基本名が同じ（少なくとも 1 件に印がある）
-    by_base = defaultdict(list)
-    marked = {}
-    for r in rows:
-        if r["mimeType"] == SHORTCUT:
-            continue
+    stripped = {}
+    for r in real:
         base, ext, _ = split_ext(r["title"], r["mimeType"])
-        stripped, changed = strip_markers(base)
-        by_base[(stripped, ext.lower())].append(r)
-        marked[r["id"]] = changed
+        stripped[r["id"]] = (*strip_markers(base), ext.lower())
     s_sets = [{m["id"] for m in g} for g in groups["S"]]
-    for members in by_base.values():
-        if len(members) > 1 and any(marked[m["id"]] for m in members):
-            ids = {m["id"] for m in members}
-            if len({normalize(m["title"]) for m in members}) > 1 and ids not in s_sets:
-                groups["V"].append(members)
+    groups["V"] = []
+    for g in group_by(real, lambda r: (stripped[r["id"]][0], stripped[r["id"]][2])):
+        ids = {m["id"] for m in g}
+        if any(stripped[m["id"]][1] for m in g) and len({normalize(m["title"]) for m in g}) > 1 and ids not in s_sets:
+            groups["V"].append(g)
 
-    # Z: 同じ MIME・同じサイズ（1KB 以上）で名前が違う（S と完全に重なるものは除く）
-    by_size = defaultdict(list)
-    for r in comparable:
-        if int(r["size"]) >= MIN_SIZE_FOR_SIZE_MATCH:
-            by_size[(r["mimeType"], r["size"])].append(r)
-    for members in by_size.values():
-        names = {strip_markers(split_ext(m["title"], m["mimeType"])[0])[0] for m in members}
-        if len(members) > 1 and len(names) > 1 and not all(m["id"] in s_ids for m in members):
-            groups["Z"].append(members)
+    # P: 同じフォルダで名前が非常に近い（数字だけの違いは連番として除く）
+    v_members = {m["id"] for g in groups["V"] for m in g}
+    pairs = []
+    for folder_rows in group_by(real, lambda r: r["parentId"]):
+        if len(folder_rows) > MAX_FOLDER_FOR_SIMILARITY:
+            continue
+        for a, b in combinations(folder_rows, 2):
+            na, nb = stripped[a["id"]][0], stripped[b["id"]][0]
+            if na == nb or min(len(na), len(nb)) < 4:
+                continue
+            if re.sub(r"\d", "#", na) == re.sub(r"\d", "#", nb):
+                continue
+            if a["id"] in v_members and b["id"] in v_members:
+                continue
+            if difflib.SequenceMatcher(None, na, nb).ratio() >= SIMILARITY:
+                pairs.append((a["id"], b["id"]))
+    groups["P"] = [[by_id[i] for i in sorted(g)] for g in union_groups(pairs)]
 
-    # L: 命名の問題
+    s_ids = {m["id"] for g in groups["S"] for m in g}
+    groups["Z"] = []
+    for g in group_by([r for r in comparable if int(r["size"]) >= MIN_SIZE_FOR_SIZE_MATCH],
+                      lambda r: (r["mimeType"], r["size"])):
+        names = {stripped[m["id"]][0] for m in g}
+        if len(names) > 1 and not all(m["id"] in s_ids for m in g):
+            groups["Z"].append(g)
+
+    # N のうち、Drive 外の形式ですべてサイズが違うものは別内容の可能性が高いので「弱い N」に分ける
+    def weak(g):
+        if any(m["mimeType"].startswith(NATIVE_PREFIX) for m in g):
+            return False
+        sizes = [m.get("size") for m in g]
+        return len(set(sizes)) == len(sizes)
+
+    groups["N_weak"] = [g for g in groups["N"] if weak(g)]
+    groups["N"] = [g for g in groups["N"] if not weak(g)]
+
+    # F: 同じ 2 フォルダの間に、内容も同じらしい組（S、またはサイズも同じ N）が多数ある
+    folder_pairs = defaultdict(int)
+    for g in groups["S"] + groups["N"]:
+        seen = set()
+        for a, b in combinations(g, 2):
+            if a.get("size") != b.get("size") or not a.get("size"):
+                continue
+            if a["parentId"] != b["parentId"]:
+                key = tuple(sorted((a["parentId"], b["parentId"])))
+                if key not in seen:
+                    folder_pairs[key] += 1
+                    seen.add(key)
+    paths = {r["parentId"]: (r.get("path") or "").rsplit("/", 1)[0] for r in rows}
+    folder_dups = [{"folders": list(k), "paths": [paths.get(k[0], ""), paths.get(k[1], "")], "pairs": n}
+                   for k, n in sorted(folder_pairs.items(), key=lambda kv: -kv[1]) if n >= FOLDER_DUP_MIN_PAIRS]
+
+    naming, empty, others = [], [], []
     for r in rows:
         title = r["title"]
         base, ext, space_before_ext = split_ext(title, r["mimeType"])
@@ -175,77 +253,84 @@ def find(rows, me=None):
         if len(base) > LONG_NAME:
             issues.append(f"長い名前（{len(base)} 文字）")
         if TIME_RELATIVE.search(normalize(base)):
-            issues.append("時間で意味が変わる語・コピーの印")
+            issues.append("時間で意味が変わる語・コピーの印（主題の一部なら問題なし）")
         if issues:
             naming.append((r, issues))
-        if not r["mimeType"].startswith(NATIVE_PREFIX) and (r.get("size") or "") == "0":
+        if not r["mimeType"].startswith(NATIVE_PREFIX) and r.get("size") == "0":
             empty.append(r)
         if me and r.get("owner") and r["owner"] != me:
             others.append(r)
 
-    return groups, naming, empty, others
+    markers = {i: v[1] for i, v in stripped.items() if v[1]}
+    return groups, folder_dups, naming, empty, others, markers
 
 
 GROUP_TITLES = {
     "S": "S: 同じ MIME・サイズ・更新日時（同じ元ファイルのコピーの可能性が高い）",
-    "N": "N: 同じ名前（正規化後）",
-    "V": "V: コピー・版の印を除くと同じ基本名",
+    "N": "N: 同じ名前（正規化後。同じフォルダ内も含む）",
+    "V": "V: コピー・版・派生の印を除くと同じ基本名",
+    "P": "P: 同じフォルダで名前が非常に近い",
     "Z": "Z: 同じ MIME・サイズで名前が違う",
 }
 
 
-def render_markdown(groups, naming, empty, others, total):
-    out = [
-        "# 候補一覧（判定ではない）",
-        "",
-        f"- 入力: {total} 件（フォルダを除く）",
-    ]
-    for key in "SNVZ":
+def render_markdown(groups, folder_dups, naming, empty, others, markers, total, broken):
+    out = ["# 候補一覧（判定ではない）", "", f"- 入力: {total} 件（フォルダを除く）"]
+    if broken:
+        out.append(f"- 読み込めなかった行: {broken} 件（TSV を確認すること）")
+    for key in "SNVPZ":
         out.append(f"- {GROUP_TITLES[key]}: {len(groups[key])} グループ")
+    out.append(f"- N（弱）: 同じ名前だがサイズがすべて違う: {len(groups['N_weak'])} グループ（名前だけ列挙）")
+    out.append(f"- F: フォルダ複製の疑い: {len(folder_dups)} 組")
     out.append(f"- L: 命名の問題: {len(naming)} 件")
-    if empty:
-        out.append(f"- X: 空のファイル（0 バイト）: {len(empty)} 件")
+    out.append(f"- X: 空のファイル（0 バイト）: {len(empty)} 件")
     if others:
         out.append(f"- 他人がオーナー: {len(others)} 件（変更対象外）")
-    for key in "SNVZ":
+    if folder_dups:
+        out += ["", "## F: フォルダ複製の疑い（個別に提案せず、まとめて 1 件の要確認にする）"]
+        for d in folder_dups:
+            out.append(f"- {d['paths'][0] or d['folders'][0]} ⇔ {d['paths'][1] or d['folders'][1]}: {d['pairs']} 組")
+    for key in "SNVPZ":
         if not groups[key]:
             continue
         out += ["", f"## {GROUP_TITLES[key]}"]
         for i, members in enumerate(sorted(groups[key], key=len, reverse=True), 1):
-            out.append("")
-            out.append(f"### {key}{i}（{len(members)} 件）")
+            out += ["", f"### {key}{i}（{len(members)} 件）"]
             for m in members[:MAX_GROUP_LISTED]:
-                out.append(f"- {label(m)}")
+                mark = f" | 印: {'・'.join(markers[m['id']])}" if key == "V" and m["id"] in markers else ""
+                out.append(f"- {label(m)}{mark}")
             if len(members) > MAX_GROUP_LISTED:
                 out.append(f"- ほか {len(members) - MAX_GROUP_LISTED} 件")
+    if groups["N_weak"]:
+        out += ["", "## N（弱）: 同じ名前だがサイズがすべて違う（別内容の可能性が高い。重複として扱わない）"]
+        out += [f"- {g[0]['title']} × {len(g)}" for g in groups["N_weak"]]
     if naming:
         out += ["", "## L: 命名の問題"]
-        for r, issues in naming:
-            out.append(f"- {label(r)} → {'、'.join(issues)}")
+        out += [f"- {label(r)} → {'、'.join(issues)}" for r, issues in naming]
     if empty:
         out += ["", "## X: 空のファイル（0 バイト）"]
-        for r in empty:
-            out.append(f"- {label(r)}")
+        out += [f"- {label(r)}" for r in empty]
     if others:
         out += ["", "## 他人がオーナー（変更対象外）"]
-        for r in others:
-            out.append(f"- {label(r)} | owner {r['owner']}")
+        out += [f"- {label(r)} | owner {r['owner']}" for r in others]
     return "\n".join(out) + "\n"
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("inventory", help="インベントリ TSV")
-    parser.add_argument("--me", help="自分のメールアドレス（他人がオーナーのファイルに印を付ける）")
+    parser.add_argument("--me", help="自分のメールアドレス（検索結果の owner と同じ形式）")
     parser.add_argument("--json", action="store_true", help="JSON で出力する")
     args = parser.parse_args()
 
-    rows = load(args.inventory)
-    groups, naming, empty, others = find(rows, args.me)
+    rows, broken = load(args.inventory)
+    groups, folder_dups, naming, empty, others, markers = find(rows, args.me)
     if args.json:
         payload = {
             "total": len(rows),
+            "broken_rows": broken,
             "groups": {k: [[m["id"] for m in g] for g in v] for k, v in groups.items()},
+            "folder_duplicates": folder_dups,
             "naming": [{"id": r["id"], "title": r["title"], "issues": i} for r, i in naming],
             "empty": [r["id"] for r in empty],
             "others": [r["id"] for r in others],
@@ -253,7 +338,7 @@ def main():
         json.dump(payload, sys.stdout, ensure_ascii=False, indent=2)
         sys.stdout.write("\n")
     else:
-        sys.stdout.write(render_markdown(groups, naming, empty, others, len(rows)))
+        sys.stdout.write(render_markdown(groups, folder_dups, naming, empty, others, markers, len(rows), broken))
 
 
 if __name__ == "__main__":
