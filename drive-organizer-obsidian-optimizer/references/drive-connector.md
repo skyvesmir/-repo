@@ -18,7 +18,7 @@
 `search_files`・`list_recent_files`・`get_file_metadata` は同じ項目を返す。
 
 - **返る**: `id`, `title`, `mimeType`, `fileExtension`（Drive 外から来たファイル）, `fileSize`, `createdTime`, `modifiedTime`, `viewedByMeTime`, `owner`（メールアドレス）, `parentId`（1 つ）, `viewUrl`, `canAddChildren`（フォルダへの書き込み可否）, ときどき `description`
-- **返らない**: フルパス、MD5 などのチェックサム、ゴミ箱に入っているかどうか、共有の概要、版の一覧
+- **返らない**: フルパス、MD5 などのチェックサム、ゴミ箱に入っているかどうか、共有の概要、版の一覧、ショートカットの参照先
 
 帰結:
 
@@ -37,7 +37,7 @@
 - **`fullText contains`**: Markdown の本文にも一致した。ヒットは候補であり、ヒットしないことは「含まれない」ことの証明にならない。
 - 文字列は単引用符で囲み、名前に含まれる `'` は `\'` とエスケープする。
 - 並び順は指定できない（`search_files` に並び替えの引数はない）。新しい順が必要なら `list_recent_files`（`orderBy: lastModified` など）を使うが、こちらはクエリで絞れない。
-- ゴミ箱内のファイルを除く条件はクエリに書けない。
+- ゴミ箱内のファイルを除く条件はクエリに書けない。**ゴミ箱内のファイルが検索結果に出るかどうかは未確認**。最初のゴミ箱移動の直後に確かめ（SKILL.md §6-2 の手順 4）、結果を状態ブロックの `trashed_in_search` に記録する。
 
 ## 3. 本文の取得
 
@@ -47,8 +47,10 @@
   - 絵文字などが文字化けすることがある
   - この表現は将来変わりうる（ツール説明にもそう書かれている）
   - → 内容の理解と比較には使えるが、原文ではない。書き戻しや、原文とのバイト比較に使わない。比較するときは両方を同じ方法で取得する。
-- `download_file_content` は原文を base64 で返す。長い日本語の base64 を頭の中で復号するのは誤りやすいので、原文そのものが必要な場面（ほぼない）以外では使わない。
+  - ログの状態ブロックを読み戻すときは、ファイル ID やパスに付いたバックスラッシュ（`\_` `\-`）を外す。Drive の ID には `_` や `-` が含まれる。
+- `download_file_content` は原文を base64 で返す。長い日本語の base64 を頭の中で復号するのは誤りやすいので、小さなテキスト（目安 50KB 以下）で原文そのものが必要な場面以外では使わない。
 - Google ドキュメント・スライド・スプレッドシート、PDF、Office 形式、画像は `read_file_content` で読める。画像は本文比較の対象にしない。
+- 取得する長さを指定する引数はない。読む前に大きさを見積もる（SKILL.md §3）。
 - 版の一覧を取るツールはない（`download_file_content` の `revisionId` は、ID を知っていても一覧が取れないので使えない）。
 
 ## 4. 書き込み系ツール
@@ -77,8 +79,8 @@ parentId = 'FOLDER_A' and mimeType = 'text/markdown'
 # 特定の複数ファイル（名前で）
 title = '企画書.docx' or title = '企画書 のコピー.docx'
 
-# 被リンク候補（Vault 内の Markdown に絞るのは、結果の parentId で行う）
-fullText contains 'シューニャ' and mimeType = 'text/markdown'
+# 被リンク候補（1 つの名前につき 1 回。対象ノート自身の除き方は references/obsidian.md §7-1）
+fullText contains 'シューニャ' and (mimeType contains 'markdown' or title contains '.md' or title contains '.canvas')
 
 # 特徴的な一節で派生・転記を探す
 fullText contains 'アクエラの街は、水の匂いより先に'
@@ -86,13 +88,16 @@ fullText contains 'アクエラの街は、水の匂いより先に'
 # 前回以降の変更（定期実行）
 owner = 'me' and (modifiedTime > '2026-09-01T00:00:00Z' or createdTime > '2026-09-01T00:00:00Z')
 
+# 実行前の事前確認（対象を含むフォルダをまとめて取り直す。鮮度と衝突を同時に確かめる）
+parentId = 'FOLDER_A' or parentId = 'FOLDER_B' or parentId = 'DEST_FOLDER'
+
 # ネイティブ形式を除く（サイズ比較の対象を絞る）
 not mimeType contains 'application/vnd.google-apps.'
 ```
 
 ## 6. インベントリ TSV の形式
 
-`scripts/find_candidates.py` の入力。1 行目はヘッダー、タブ区切り。
+`scripts/find_candidates.py` の入力。インベントリが 300 件を超えるときだけ作る。1 行目はヘッダー、タブ区切り、引用符なし。下の列だけを書き、検索結果の JSON を丸ごと写さない。
 
 | 列 | 必須 | 内容 |
 |---|---|---|
@@ -104,7 +109,7 @@ not mimeType contains 'application/vnd.google-apps.'
 | `parentId` | ○ | 親フォルダ ID |
 | `createdTime` | | 作成日時 |
 | `path` | | 組み立てたパス（あれば出力が読みやすくなる） |
-| `owner` | | オーナー（`--me` と組み合わせて他人のファイルに印を付ける） |
+| `owner` | | オーナー（`--me` と組み合わせて他人のファイルに印を付ける。`--me` には、`owner = 'me'` で検索した結果の `owner` の値を使う） |
 
 ```bash
 python3 scripts/find_candidates.py inventory.tsv --me you@example.com > candidates.md

@@ -17,6 +17,7 @@ TSV（1 行目はヘッダー、タブ区切り、引用符なし）:
     P  同じフォルダで名前が非常に近い（数字だけの違いは連番として除く）
     Z  同じ MIME・サイズ（1KB 以上）で名前が違う
     F  フォルダ複製の疑い（同じ 2 フォルダの間に、サイズも同じ S/N の組が多数）
+    T  同じ語を名前に含むまとまり（同一テーマの大量ファイル。重複ではなく一貫性の確認用）
     L  命名の問題
     X  空のファイル（0 バイト）
 """
@@ -78,6 +79,10 @@ MAX_GROUP_LISTED = 10
 SIMILARITY = 0.85
 MAX_FOLDER_FOR_SIMILARITY = 400
 FOLDER_DUP_MIN_PAIRS = 5
+# T: 語の出現ファイル数がこの範囲のものだけを出す（多すぎる語は一般語とみなす）
+THEME_MIN_FILES, THEME_MAX_FILES, THEME_LISTED = 3, 50, 15
+# 文字種の連なりで名前を語に分ける（形態素解析の代わりの粗い方法）
+TOKEN_RUNS = re.compile(r"[\u30a1-\u30fa\u30fc-\u30ff]+|[\u4e00-\u9fff々]+|[a-z][a-z0-9]*")
 
 
 def normalize(text):
@@ -131,6 +136,18 @@ def load(path):
     if broken:
         print(f"警告: 列数が合わない行を {len(broken)} 行とばしました（行番号: {broken[:10]}）", file=sys.stderr)
     return [r for r in rows if r["mimeType"] != FOLDER], len(broken)
+
+
+def theme_tokens(base):
+    """カタカナ・漢字は 2 文字以上、英字は 3 文字以上の語を返す（ひらがなと数字は捨てる）。"""
+    out = set()
+    for tok in TOKEN_RUNS.findall(base):
+        if tok[0].isascii():
+            if len(tok) >= 3:
+                out.add(tok)
+        elif len(tok) >= 2:
+            out.add(tok)
+    return out
 
 
 def label(row):
@@ -237,6 +254,20 @@ def find(rows, me=None):
     folder_dups = [{"folders": list(k), "paths": [paths.get(k[0], ""), paths.get(k[1], "")], "pairs": n}
                    for k, n in sorted(folder_pairs.items(), key=lambda kv: -kv[1]) if n >= FOLDER_DUP_MIN_PAIRS]
 
+    # T: 同じ語を名前に含むファイルのまとまり。複数のフォルダにまたがる語を先に出す
+    by_token = defaultdict(list)
+    for r in real:
+        for tok in theme_tokens(stripped[r["id"]][0]):
+            by_token[tok].append(r)
+    themes = []
+    for tok, members in by_token.items():
+        # 語を除いた残り（数字と区切りも除く）が 1 種類しかなければ、連番や同名の並びなので出さない
+        contexts = {re.sub(r"[\d\s_\-－・.]+", "", stripped[m["id"]][0].replace(tok, "")) for m in members}
+        if THEME_MIN_FILES <= len(members) <= THEME_MAX_FILES and len(contexts) >= 2:
+            themes.append((tok, members, len({m["parentId"] for m in members})))
+    themes.sort(key=lambda t: (-t[2], -len(t[1]), t[0]))
+    groups["T"] = themes[:THEME_LISTED]
+
     naming, empty, others = [], [], []
     for r in rows:
         title = r["title"]
@@ -282,6 +313,7 @@ def render_markdown(groups, folder_dups, naming, empty, others, markers, total, 
         out.append(f"- {GROUP_TITLES[key]}: {len(groups[key])} グループ")
     out.append(f"- N（弱）: 同じ名前だがサイズがすべて違う: {len(groups['N_weak'])} グループ（名前だけ列挙）")
     out.append(f"- F: フォルダ複製の疑い: {len(folder_dups)} 組")
+    out.append(f"- T: 同じ語を名前に含むまとまり: {len(groups['T'])} 語（上位のみ。重複の候補ではない）")
     out.append(f"- L: 命名の問題: {len(naming)} 件")
     out.append(f"- X: 空のファイル（0 バイト）: {len(empty)} 件")
     if others:
@@ -301,6 +333,12 @@ def render_markdown(groups, folder_dups, naming, empty, others, markers, total, 
                 out.append(f"- {label(m)}{mark}")
             if len(members) > MAX_GROUP_LISTED:
                 out.append(f"- ほか {len(members) - MAX_GROUP_LISTED} 件")
+    if groups["T"]:
+        out += ["", "## T: 同じ語を名前に含むまとまり（一貫性の確認用。役割は内容で判断する）"]
+        for tok, members, folders in groups["T"]:
+            names = "、".join(m["title"] for m in members[:MAX_GROUP_LISTED])
+            more = f" ほか {len(members) - MAX_GROUP_LISTED} 件" if len(members) > MAX_GROUP_LISTED else ""
+            out.append(f"- 「{tok}」: {len(members)} 件・{folders} フォルダ — {names}{more}")
     if groups["N_weak"]:
         out += ["", "## N（弱）: 同じ名前だがサイズがすべて違う（別内容の可能性が高い。重複として扱わない）"]
         out += [f"- {g[0]['title']} × {len(g)}" for g in groups["N_weak"]]
@@ -329,7 +367,8 @@ def main():
         payload = {
             "total": len(rows),
             "broken_rows": broken,
-            "groups": {k: [[m["id"] for m in g] for g in v] for k, v in groups.items()},
+            "groups": {k: [[m["id"] for m in g] for g in v] for k, v in groups.items() if k != "T"},
+            "themes": [{"token": t, "ids": [m["id"] for m in ms], "folders": n} for t, ms, n in groups["T"]],
             "folder_duplicates": folder_dups,
             "naming": [{"id": r["id"], "title": r["title"], "issues": i} for r, i in naming],
             "empty": [r["id"] for r in empty],

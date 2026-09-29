@@ -631,6 +631,8 @@ def build_large():
 
     def ts(year=2025, month=None, day=None):
         m = month or rng.randint(1, 12)
+        if year >= 2026 and m > 9:
+            m -= 3  # 評価の「現在」（2026-09-29）より未来にしない。乱数の消費は変えない
         d = day or rng.randint(1, 28)
         return f"{year}-{m:02d}-{d:02d}T{rng.randint(0, 23):02d}:{rng.randint(0, 59):02d}:{rng.randint(0, 59):02d}Z"
 
