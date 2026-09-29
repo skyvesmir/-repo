@@ -1,0 +1,6 @@
+# ローカル専用の設定（評価中に実 Drive ツールを遮断するための deny ルール）
+.claude/settings.local.json
+# 評価の作業領域（結果の要約は docs/ に残す）
+drive-organizer-obsidian-optimizer-workspace/
+__pycache__/
+*.pyc

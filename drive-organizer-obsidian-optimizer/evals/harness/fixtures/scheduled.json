@@ -1,0 +1,1036 @@
+{
+ "me": "writer@example.com",
+ "root_id": "0AROOTcreativeFixture000000000000",
+ "now": "2026-09-29T09:00:00Z",
+ "files": [
+  {
+   "id": "1c581ef7a1b295aeaa862be5da3283bbd",
+   "title": "創作",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "0AROOTcreativeFixture000000000000",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1a1c5f54fea4d826859eed452ecdd616e",
+   "title": "Obsidian",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "1c581ef7a1b295aeaa862be5da3283bbd",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1e45e52f9fa78af961f45f2c6b00316c3",
+   "title": ".obsidian",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "1a1c5f54fea4d826859eed452ecdd616e",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "11a58756f636a955bb693045217c8d5b4",
+   "title": "人物",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "1a1c5f54fea4d826859eed452ecdd616e",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "10de9807ab295c66d17c0b0425c093f2e",
+   "title": "設定",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "1a1c5f54fea4d826859eed452ecdd616e",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "17cdf18fd6f137cb5e87a9134264e1578",
+   "title": "章",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "1a1c5f54fea4d826859eed452ecdd616e",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1c6dde2aad0dfbd1d67d55dcbd4f3d374",
+   "title": "メモ",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "1a1c5f54fea4d826859eed452ecdd616e",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1569ef9cb501bca3ba8875ffe229559ee",
+   "title": "添付",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "1a1c5f54fea4d826859eed452ecdd616e",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1dbf9f69c52772469afdf008dbc894b31",
+   "title": "Templates",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "1a1c5f54fea4d826859eed452ecdd616e",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "11b1064416835b6716f785792598e3540",
+   "title": "Daily",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "1a1c5f54fea4d826859eed452ecdd616e",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1acc91cec1690fdc33419f732d25e5649",
+   "title": "原稿",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "1c581ef7a1b295aeaa862be5da3283bbd",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "135df3be2ac72c16473c65c116c8e4b70",
+   "title": "資料",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "1c581ef7a1b295aeaa862be5da3283bbd",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1fd85f25d1f01270d69f02690949d5d64",
+   "title": "未整理",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "0AROOTcreativeFixture000000000000",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "19ee9f0d024ec2d4852a27c4cd42165bc",
+   "title": "議事録",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "0AROOTcreativeFixture000000000000",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1969f5bc85b12f6e9e92ef7363e461c3a",
+   "title": "写真",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "0AROOTcreativeFixture000000000000",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "11503aaba1660532ebab787219ffc8901",
+   "title": "tool-app",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "0AROOTcreativeFixture000000000000",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1e7a6b2cd61003f3c3b5b7791d24382b6",
+   "title": "src",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "11503aaba1660532ebab787219ffc8901",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "138710b9d86bfe68ba6feb0e8c0cf92e0",
+   "title": "node_modules",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "11503aaba1660532ebab787219ffc8901",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "10764b366f2408e1d8576390cdfd788e0",
+   "title": "app.json",
+   "mimeType": "application/json",
+   "parentId": "1e45e52f9fa78af961f45f2c6b00316c3",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-07-01T09:00:00Z",
+   "owner": "writer@example.com",
+   "content": "{\"alwaysUpdateLinks\": true, \"newLinkFormat\": \"shortest\", \"attachmentFolderPath\": \"添付\"}"
+  },
+  {
+   "id": "1bf30f800505330b8b03a92c7067e3ff5",
+   "title": "daily-notes.json",
+   "mimeType": "application/json",
+   "parentId": "1e45e52f9fa78af961f45f2c6b00316c3",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com",
+   "content": "{\"folder\": \"Daily\", \"format\": \"YYYY-MM-DD\"}"
+  },
+  {
+   "id": "1e648ad27ef4e9105d5c2914bd94e531d",
+   "title": "templates.json",
+   "mimeType": "application/json",
+   "parentId": "1e45e52f9fa78af961f45f2c6b00316c3",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com",
+   "content": "{\"folder\": \"Templates\"}"
+  },
+  {
+   "id": "1cea35b2466814e9ed33000ef6b1f5cda",
+   "title": "workspace.json",
+   "mimeType": "application/json",
+   "parentId": "1e45e52f9fa78af961f45f2c6b00316c3",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-09-20T09:00:00Z",
+   "owner": "writer@example.com",
+   "content": "{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}{\"main\": {\"id\": \"a1b2\"}}"
+  },
+  {
+   "id": "18f5e074ceb48c9c4dfc3a5acbe96902d",
+   "title": "シューニャ.md",
+   "mimeType": "text/markdown",
+   "parentId": "11a58756f636a955bb693045217c8d5b4",
+   "createdTime": "2026-05-03T09:00:00Z",
+   "modifiedTime": "2026-07-02T13:00:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: character\ntags:\n  - 人物\n  - 主要\naliases:\n  - Shunya\n---\n# シューニャ\n\n![[シューニャ_立ち絵.png]]\n\n- 年齢: 17歳\n- 出身: 北の鉱山町ノルデ\n- 役割: 主人公。晶の記憶を聴く「聴律」の使い手\n\n## 性格\n無口だが観察が細かい。一度聴いた音を忘れない。\n\n## 物語上の役割\n父の死の真相を追い、静守会の隠蔽に迫る。能力の詳細は [[シューニャ設定]] を参照。\n\n## 関係\n- [[キャラ_カルタ]]とは第2章で出会う。\n- [[ペトロス]]は旅の導き手。\n"
+  },
+  {
+   "id": "104f76fd22a71d1564314b554caf95ccd",
+   "title": "シューニャ設定.md",
+   "mimeType": "text/markdown",
+   "parentId": "11a58756f636a955bb693045217c8d5b4",
+   "createdTime": "2026-05-04T09:00:00Z",
+   "modifiedTime": "2026-06-11T08:00:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: setting\ntags:\n  - 設定\n  - 能力\n---\n# シューニャ設定（聴律の詳細）\n\n[[シューニャ]] の能力「聴律」に関する設定メモ。人物像は人物ノートにまとめる。\n\n## 発動条件\n1. 素手で晶に触れる\n2. 呼吸と鼓動を晶の律に合わせる\n\n## 代償\n再生のたびに晶の内側の罅が進む。強い記憶ほど晶が砕けやすい。\n\n## 未決事項\n- 聴律が遺伝するかどうか（現状は「しない」で進める）\n"
+  },
+  {
+   "id": "1e2f1b860255aef91037ea6dbe1b37433",
+   "title": "キャラ_カルタ.md",
+   "mimeType": "text/markdown",
+   "parentId": "11a58756f636a955bb693045217c8d5b4",
+   "createdTime": "2026-05-05T09:00:00Z",
+   "modifiedTime": "2026-06-12T08:00:00Z",
+   "owner": "writer@example.com",
+   "content": "# カルタ\n\n- 元盗掘屋。地図読みの名人\n- 年齢: 24歳\n- 負い目: 売った地図が原因で坑道事故が起きた疑いを抱えている（第11章で自己開示）\n\n第2章でシューニャと出会い、以後の旅に同行する。\n"
+  },
+  {
+   "id": "15c1cb5f009d64ea0b040403fd07dbb14",
+   "title": "ペトロス.md",
+   "mimeType": "text/markdown",
+   "parentId": "11a58756f636a955bb693045217c8d5b4",
+   "createdTime": "2026-05-06T09:00:00Z",
+   "modifiedTime": "2026-06-13T08:00:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntag: 人物\nType: Character\n---\n# ペトロス\n\n崖の番人を辞めて旅に同行した老人。シューニャたちの導き手。\n\n- 年齢: 68歳\n- 得意: 古い坑道図の読解\n"
+  },
+  {
+   "id": "112e01a779875ff819449ed83b9dd38fd",
+   "title": "モーラ.md",
+   "mimeType": "text/markdown",
+   "parentId": "11a58756f636a955bb693045217c8d5b4",
+   "createdTime": "2026-05-07T09:00:00Z",
+   "modifiedTime": "2026-06-14T08:00:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: character\ntags:\n  - 人物\n---\n# モーラ\n\n目録を焼いた火事の夜、告発せず沈黙を選んだ元書記。クラウスと鏡合わせになる「小さな隠蔽者」。\n"
+  },
+  {
+   "id": "17e5be921f0dbc022f3007209d16a02fd",
+   "title": "世界観.md",
+   "mimeType": "text/markdown",
+   "parentId": "10de9807ab295c66d17c0b0425c093f2e",
+   "createdTime": "2026-05-08T09:00:00Z",
+   "modifiedTime": "2026-07-10T11:20:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: setting\ntags:\n  - 設定\n---\n# 世界観\n\n![[Pasted image 20240501123456.png]]\n\n## 星脈\n大陸の地下を走る結晶の鉱脈。晶は強い震えを記憶する。\n\n## 勢力\n- 教会: 遺物の認可を独占する\n- 静守会: 千年紀の記録を隠蔽する機関\n- 商会連合: 遺物市を仕切る\n\n## 地理\n北の鉱山町ノルデ、運河の街アクエラ、南の聖都ルーメン。\n"
+  },
+  {
+   "id": "12fefadeea62d8faf794b1e91ae03cf1c",
+   "title": "律術.md",
+   "mimeType": "text/markdown",
+   "parentId": "10de9807ab295c66d17c0b0425c093f2e",
+   "createdTime": "2026-05-09T09:00:00Z",
+   "modifiedTime": "2026-06-20T08:00:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: setting\ntags:\n  - 設定\n---\n# 晶律（しょうりつ）\n\n本作の魔法体系。晶に律を合わせて力を引き出す技術の総称。\n\n初期稿では「律術」と呼んでいたが、第2稿から「晶律」に改めた。旧称の「律術」は、作中の古文書と第03章の引用部分でのみ使う。\n\n## 分類\n- 聴律: 晶の記憶を聴く（シューニャのみ）\n- 鳴律: 晶を震わせて音を出す\n- 鎮律: 共振を鎮める\n"
+  },
+  {
+   "id": "10dfe2b330523f8a8ce5a52ed3087686a",
+   "title": "用語集.md",
+   "mimeType": "text/markdown",
+   "parentId": "10de9807ab295c66d17c0b0425c093f2e",
+   "createdTime": "2026-05-10T09:00:00Z",
+   "modifiedTime": "2026-06-21T08:00:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: reference\ntags:\n  - 設定\n  - 用語\n---\n# 用語集\n\n| 用語 | 読み | 意味 |\n|---|---|---|\n| 晶 | しょう | 星脈から採れる結晶 |\n| 晶律 | しょうりつ | 魔法体系（旧称: 律術） |\n| 軋み鳴き | きしみなき | 坑道が崩れる前の音 |\n"
+  },
+  {
+   "id": "1e83bb3945dd950e4244e420c8da45398",
+   "title": "第01章.md",
+   "mimeType": "text/markdown",
+   "parentId": "17cdf18fd6f137cb5e87a9134264e1578",
+   "createdTime": "2026-05-11T09:00:00Z",
+   "modifiedTime": "2026-06-25T08:00:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: chapter\ntags:\n  - 本文\n---\n# 第01章 沈黙の夜の呼び名\n\n北の山あいの町ノルデに、秋は音から訪れる。\n\n[[シューニャ]]は、その朝も第三坑の奥にいた。灯り晶のほのかな光が坑道の壁を照らしている。\n\n（本文続く。舞台設定は [[世界観]] を参照）\n"
+  },
+  {
+   "id": "16dcc5ed75c69a121b9f28b12edd51e50",
+   "title": "第02章.md",
+   "mimeType": "text/markdown",
+   "parentId": "17cdf18fd6f137cb5e87a9134264e1578",
+   "createdTime": "2026-05-12T09:00:00Z",
+   "modifiedTime": "2026-06-28T08:00:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: chapter\ntags:\n  - 本文\n---\n# 第02章 水の街の地図屋\n\nアクエラの街は、水の匂いより先に、音で分かった。\n\n裏路地の戸板の店で、[[シューニャ]]は一人の地図屋に出会う。[[キャラ_カルタ]]と名乗ったその若者は、坑道図を一目見るなり眉をひそめた。\n"
+  },
+  {
+   "id": "19baa24719764ef399ae86d9afd373489",
+   "title": "第03章.md",
+   "mimeType": "text/markdown",
+   "parentId": "17cdf18fd6f137cb5e87a9134264e1578",
+   "createdTime": "2026-05-13T09:00:00Z",
+   "modifiedTime": "2026-07-01T08:00:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: chapter\ntags:\n  - 本文\n---\n# 第03章 古文書の律\n\n古文書にはこうあった。「[[律術]]を修めし者、晶の声を畏れよ」。\n\n[[モーラ]]はその一節を指でなぞり、黙り込んだ。\n"
+  },
+  {
+   "id": "17f2492dbe424a3cfb8dc4e7fec84cd86",
+   "title": "無題.md",
+   "mimeType": "text/markdown",
+   "parentId": "1c6dde2aad0dfbd1d67d55dcbd4f3d374",
+   "createdTime": "2026-05-14T09:00:00Z",
+   "modifiedTime": "2026-05-14T09:30:00Z",
+   "owner": "writer@example.com",
+   "content": "第4章のアイデア\n\n- 遺物市の裏で静守会の使いと接触する\n- ペトロスが古い坑道図の誤りに気づく\n- 章の終わりでカルタの負い目を匂わせる\n"
+  },
+  {
+   "id": "1aa9f4897957b61a4971dacd2de4e1a3a",
+   "title": "2024-5-3 打ち合わせ.md",
+   "mimeType": "text/markdown",
+   "parentId": "1c6dde2aad0dfbd1d67d55dcbd4f3d374",
+   "createdTime": "2026-05-15T09:00:00Z",
+   "modifiedTime": "2026-05-15T09:00:00Z",
+   "owner": "writer@example.com",
+   "content": "2024年5月3日 編集者との打ち合わせ\n\n- 第1部の締切は8月末\n- 用語集を巻末に付ける\n- 「律術」→「晶律」への改名はOK\n"
+  },
+  {
+   "id": "10b4d4b8f54f064a1240f5f2524c4775f",
+   "title": "シューニャ_立ち絵.png",
+   "mimeType": "image/png",
+   "parentId": "1569ef9cb501bca3ba8875ffe229559ee",
+   "createdTime": "2026-05-03T09:10:00Z",
+   "modifiedTime": "2026-05-03T09:10:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 480000,
+   "content_key": "portrait"
+  },
+  {
+   "id": "16782257206828fb7492606a1079ad63e",
+   "title": "Pasted image 20240501123456.png",
+   "mimeType": "image/png",
+   "parentId": "1569ef9cb501bca3ba8875ffe229559ee",
+   "createdTime": "2026-05-08T09:10:00Z",
+   "modifiedTime": "2026-05-08T09:10:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 210000,
+   "content_key": "map"
+  },
+  {
+   "id": "1963bb40ad7d3972cefd519ec2915b2a6",
+   "title": "人物テンプレート.md",
+   "mimeType": "text/markdown",
+   "parentId": "1dbf9f69c52772469afdf008dbc894b31",
+   "createdTime": "2026-05-02T11:00:00Z",
+   "modifiedTime": "2026-05-02T11:00:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: character\ntags:\n  - 人物\ncreated: <% tp.date.now(\"YYYY-MM-DD\") %>\n---\n# <% tp.file.title %>\n\n- 年齢:\n- 出身:\n- 役割:\n"
+  },
+  {
+   "id": "10a7db995cdc3e655af986f4c64af82c8",
+   "title": "2024-05-01.md",
+   "mimeType": "text/markdown",
+   "parentId": "11b1064416835b6716f785792598e3540",
+   "createdTime": "2026-05-02T12:00:00Z",
+   "modifiedTime": "2026-05-02T12:00:00Z",
+   "owner": "writer@example.com",
+   "content": "# 2024-05-01\n\n- 第1章の冒頭を書き直した\n- 世界観の地図を描いた（Pasted image として貼り付け）\n"
+  },
+  {
+   "id": "1b8a6f1d7bfcc13e22fc8ccf557c49e96",
+   "title": "六炎_第1部_最終版",
+   "mimeType": "application/vnd.google-apps.document",
+   "parentId": "1acc91cec1690fdc33419f732d25e5649",
+   "createdTime": "2026-05-20T09:00:00Z",
+   "modifiedTime": "2026-06-01T10:00:00Z",
+   "owner": "writer@example.com",
+   "content": "六炎 第1部\n\n第一章 沈黙の夜\n\n北の山あいの町ノルデに、秋は音から訪れる。白樺の梢が乾いた風に鳴り、選鉱場の水車が氷の膜を割って軋む。\nシューニャは第三坑の奥で、露頭に指を添えた。石は低く唸っていた。途切れない唸りだった。\n親方のガランは何も訊かずに頷き、その日の採掘をやめさせた。\n\n第二章 水の街の地図屋\n\nアクエラの街は、水の匂いより先に、音で分かった。荷揚げの掛け声、艀のぶつかる鈍い音、水門の軋み。\n裏路地の戸板の店で、シューニャはカルタと名乗る地図屋に出会う。\n"
+  },
+  {
+   "id": "1de2b5172913a69262487eee8b3e4900f",
+   "title": "六炎_第1部_最終版2",
+   "mimeType": "application/vnd.google-apps.document",
+   "parentId": "1acc91cec1690fdc33419f732d25e5649",
+   "createdTime": "2026-06-02T09:00:00Z",
+   "modifiedTime": "2026-06-20T10:00:00Z",
+   "owner": "writer@example.com",
+   "content": "六炎 第1部\n\n第一章 沈黙の夜\n\n北の山あいの町ノルデに、秋は音から訪れる。白樺の梢が乾いた風に鳴り、選鉱場の水車が氷の膜を割って軋む。\nシューニャは第三坑の奥で、露頭に指を添えた。石は低く唸っていた。途切れない唸りだった。\n親方のガランは何も訊かずに頷き、その日の採掘をやめさせた。\n\n第二章 水の街の地図屋\n\nアクエラの街は、水の匂いより先に、音で分かった。荷揚げの掛け声、艀のぶつかる鈍い音、水門の軋み。\n裏路地の戸板の店で、シューニャはカルタと名乗る地図屋に出会う。\n\n第三章 古文書の律\n\n教会の書庫で、モーラは古文書の一節を指でなぞった。「律術を修めし者、晶の声を畏れよ」。\nその夜、書庫の目録が一冊だけ消えていた。\n"
+  },
+  {
+   "id": "1687728f161df8a371d91fdb5bf190699",
+   "title": "六炎_第1部_最新版",
+   "mimeType": "application/vnd.google-apps.document",
+   "parentId": "1acc91cec1690fdc33419f732d25e5649",
+   "createdTime": "2026-06-03T09:00:00Z",
+   "modifiedTime": "2026-09-25T21:00:00Z",
+   "owner": "writer@example.com",
+   "content": "六炎 第1部\n\n第一章 沈黙の夜\n\n北の山あいの町ノルデに、秋は音から訪れる。白樺の梢が乾いた風に鳴り、選鉱場の水車が氷の膜を割って軋み、坑道の入り口の鈴が冷気に揺れる。\nシューニャは第三坑の奥で、素手の指を露頭に添えた。石は低く、途切れずに唸っていた。\n親方のガランは太い眉を寄せ、何も訊かずに頷いた。十六の少年の言葉ひとつで、その日の段取りが変わった。\n\n第二章 水の街の地図屋\n\nアクエラの街は、水の匂いより先に、音で分かった。荷揚げの掛け声、艀のぶつかる鈍い音、水門の軋み。\n裏路地の戸板の店で、シューニャはカルタと名乗る地図屋に出会う。\n\n第三章 古文書の律\n\n教会の書庫で、モーラは古文書の一節を指でなぞった。「律術を修めし者、晶の声を畏れよ」。\nその夜、書庫の目録が一冊だけ消えていた。\n"
+  },
+  {
+   "id": "1f04ca1108443baa06fb18aa66c727570",
+   "title": "六炎_あらすじ",
+   "mimeType": "application/vnd.google-apps.document",
+   "parentId": "1acc91cec1690fdc33419f732d25e5649",
+   "createdTime": "2026-06-21T09:00:00Z",
+   "modifiedTime": "2026-06-21T12:00:00Z",
+   "owner": "writer@example.com",
+   "content": "六炎 第1部 あらすじ\n\n鉱山町ノルデの少年シューニャは、晶の記憶を聴く力を持つ。\n第一章で崩落の予兆を聴き分け、第二章で運河の街アクエラの地図屋カルタと出会う。\n第三章では教会の書庫で古文書の一節が見つかり、目録が一冊消える。\n"
+  },
+  {
+   "id": "14991c5e1a2e68f42179fe594fd56a118",
+   "title": "六炎_第1部 へのショートカット",
+   "mimeType": "application/vnd.google-apps.shortcut",
+   "parentId": "1acc91cec1690fdc33419f732d25e5649",
+   "createdTime": "2026-06-22T09:00:00Z",
+   "modifiedTime": "2026-06-22T09:00:00Z",
+   "owner": "writer@example.com",
+   "content": ""
+  },
+  {
+   "id": "15b771b773b07115918d74ba2ef1710b1",
+   "title": "参考文献メモ.md",
+   "mimeType": "text/markdown",
+   "parentId": "135df3be2ac72c16473c65c116c8e4b70",
+   "createdTime": "2026-04-01T09:00:00Z",
+   "modifiedTime": "2026-04-01T09:00:00Z",
+   "owner": "writer@example.com",
+   "content": "参考文献\n\n- 『鉱物の科学』第3版\n- 『音響学入門』\n- 『坑道の歴史と技術』\n- 論文: 圧電効果と結晶構造\n"
+  },
+  {
+   "id": "10ade09c216de56469aca581fd8690625",
+   "title": "鉱物図鑑.pdf",
+   "mimeType": "application/pdf",
+   "parentId": "135df3be2ac72c16473c65c116c8e4b70",
+   "createdTime": "2026-03-11T09:00:00Z",
+   "modifiedTime": "2026-03-10T10:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 2400000,
+   "text": "鉱物図鑑（スキャン）\n石英、長石、雲母、方解石の結晶構造と産地。\n",
+   "content_key": "zukan"
+  },
+  {
+   "id": "101d87123406f9538a7c6b2bb4feea3a5",
+   "title": "鉱物図鑑 (1).pdf",
+   "mimeType": "application/pdf",
+   "parentId": "135df3be2ac72c16473c65c116c8e4b70",
+   "createdTime": "2026-04-18T09:00:00Z",
+   "modifiedTime": "2026-03-10T10:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 2400000,
+   "text": "鉱物図鑑（スキャン）\n石英、長石、雲母、方解石の結晶構造と産地。\n",
+   "content_key": "zukan"
+  },
+  {
+   "id": "152d3db849f6feb046f06559a8dd43302",
+   "title": "鉱物図鑑_圧縮版.pdf",
+   "mimeType": "application/pdf",
+   "parentId": "135df3be2ac72c16473c65c116c8e4b70",
+   "createdTime": "2026-04-19T09:00:00Z",
+   "modifiedTime": "2026-04-19T08:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 800000,
+   "text": "鉱物図鑑（スキャン）\n石英、長石、雲母、方解石の結晶構造と産地。\n",
+   "content_key": "zukan-small"
+  },
+  {
+   "id": "18f139958aca223d2a24b8909c67ac8f5",
+   "title": "世界観.md",
+   "mimeType": "text/markdown",
+   "parentId": "1fd85f25d1f01270d69f02690949d5d64",
+   "createdTime": "2026-08-01T09:00:00Z",
+   "modifiedTime": "2026-07-10T11:20:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: setting\ntags:\n  - 設定\n---\n# 世界観\n\n![[Pasted image 20240501123456.png]]\n\n## 星脈\n大陸の地下を走る結晶の鉱脈。晶は強い震えを記憶する。\n\n## 勢力\n- 教会: 遺物の認可を独占する\n- 静守会: 千年紀の記録を隠蔽する機関\n- 商会連合: 遺物市を仕切る\n\n## 地理\n北の鉱山町ノルデ、運河の街アクエラ、南の聖都ルーメン。\n"
+  },
+  {
+   "id": "1a9100f4c69fbf6f480c03b4e13a9c022",
+   "title": "シューニャ.md",
+   "mimeType": "text/markdown",
+   "parentId": "1fd85f25d1f01270d69f02690949d5d64",
+   "createdTime": "2026-08-01T09:01:00Z",
+   "modifiedTime": "2026-04-02T08:00:00Z",
+   "owner": "writer@example.com",
+   "content": "# シューニャ\n\n- 年齢: 16歳\n- 出身: 北の鉱山町ノルデ\n- 役割: 主人公\n\n## 性格\n無口だが観察が細かい。\n"
+  },
+  {
+   "id": "192d823e5bb24ba75c452444940df2921",
+   "title": "企画書.docx",
+   "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "parentId": "1fd85f25d1f01270d69f02690949d5d64",
+   "createdTime": "2026-02-11T09:00:00Z",
+   "modifiedTime": "2026-02-10T18:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 52000,
+   "text": "企画書\n\n作品名: 六炎\nジャンル: ファンタジー\n想定読者: 中高生〜大人\n概要: 晶の記憶を聴く少年の旅。\n",
+   "content_key": "kikaku"
+  },
+  {
+   "id": "145457c47970a8356d5bba447782ca083",
+   "title": "企画書 のコピー.docx",
+   "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+   "parentId": "1fd85f25d1f01270d69f02690949d5d64",
+   "createdTime": "2026-02-12T09:00:00Z",
+   "modifiedTime": "2026-02-10T18:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 52000,
+   "text": "企画書\n\n作品名: 六炎\nジャンル: ファンタジー\n想定読者: 中高生〜大人\n概要: 晶の記憶を聴く少年の旅。\n",
+   "content_key": "kikaku",
+   "permissions": [
+    {
+     "role": "reader",
+     "type": "user",
+     "emailAddress": "editor@publisher.example"
+    }
+   ]
+  },
+  {
+   "id": "1d6d084e217bea7396d27b6ab7d1e85ef",
+   "title": "議事録_0412",
+   "mimeType": "application/vnd.google-apps.document",
+   "parentId": "1fd85f25d1f01270d69f02690949d5d64",
+   "createdTime": "2024-04-12T10:00:00Z",
+   "modifiedTime": "2024-04-12T12:00:00Z",
+   "owner": "writer@example.com",
+   "content": "定例会議 2024-04-12\n\n出席: 編集部 田中、著者\n- 第1部の構成を確認した\n- 用語集の要否は次回までに検討\n- 次回: 4月26日\n"
+  },
+  {
+   "id": "19b8119cd36e10f483c22f1ab6c3bd797",
+   "title": "2024-04-12_定例会議",
+   "mimeType": "application/vnd.google-apps.document",
+   "parentId": "1fd85f25d1f01270d69f02690949d5d64",
+   "createdTime": "2024-04-13T10:00:00Z",
+   "modifiedTime": "2024-04-13T10:05:00Z",
+   "owner": "writer@example.com",
+   "content": "定例会議 2024-04-12\n\n出席: 編集部 田中、著者\n- 第1部の構成を確認した\n- 用語集の要否は次回までに検討\n- 次回: 4月26日\n"
+  },
+  {
+   "id": "143143e227175a047693f3d37a2687d09",
+   "title": "無題のドキュメント",
+   "mimeType": "application/vnd.google-apps.document",
+   "parentId": "1fd85f25d1f01270d69f02690949d5d64",
+   "createdTime": "2026-09-27T10:52:38Z",
+   "modifiedTime": "2026-09-27T10:52:42Z",
+   "owner": "writer@example.com",
+   "content": ""
+  },
+  {
+   "id": "16cc1a1c83c0f3dd99500429ae7f45467",
+   "title": "IMG_0001.jpg",
+   "mimeType": "image/jpeg",
+   "parentId": "1fd85f25d1f01270d69f02690949d5d64",
+   "createdTime": "2026-08-02T09:00:00Z",
+   "modifiedTime": "2026-08-01T15:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 3100000,
+   "content_key": "img0001"
+  },
+  {
+   "id": "19fefc9e8300e18487abb298f63ea3537",
+   "title": "アイデア断片.md",
+   "mimeType": "text/markdown",
+   "parentId": "1fd85f25d1f01270d69f02690949d5d64",
+   "createdTime": "2026-08-03T09:00:00Z",
+   "modifiedTime": "2026-08-03T09:00:00Z",
+   "owner": "writer@example.com",
+   "content": "・青い塔の話（別作品？）\n・晶が歌う設定。六炎で使うかは未定\n・タイトル候補:『沈黙の地図』\n"
+  },
+  {
+   "id": "182482782e2efd679850d536dccf78425",
+   "title": "2024-03-08_定例会議",
+   "mimeType": "application/vnd.google-apps.document",
+   "parentId": "19ee9f0d024ec2d4852a27c4cd42165bc",
+   "createdTime": "2024-03-08T10:00:00Z",
+   "modifiedTime": "2024-03-08T12:00:00Z",
+   "owner": "writer@example.com",
+   "content": "定例会議 2024-03-08\n\n出席: 編集部 田中、著者\n- 企画の方向性を確認した\n- 次回: 3月22日\n"
+  },
+  {
+   "id": "11948217141c33df9931ab0bf3193b3d7",
+   "title": "2024-03-22_定例会議",
+   "mimeType": "application/vnd.google-apps.document",
+   "parentId": "19ee9f0d024ec2d4852a27c4cd42165bc",
+   "createdTime": "2024-03-22T10:00:00Z",
+   "modifiedTime": "2024-03-22T12:00:00Z",
+   "owner": "writer@example.com",
+   "content": "定例会議 2024-03-22\n\n出席: 編集部 田中、著者\n- 主人公の年齢を17歳に変更\n- 次回: 4月12日\n"
+  },
+  {
+   "id": "17eb221f4837bc5b3e88af8b1f3305009",
+   "title": "IMG_1001.jpg",
+   "mimeType": "image/jpeg",
+   "parentId": "1969f5bc85b12f6e9e92ef7363e461c3a",
+   "createdTime": "2026-07-01T09:00:00Z",
+   "modifiedTime": "2026-06-21T15:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 2001111,
+   "content_key": "img1001"
+  },
+  {
+   "id": "1918d41dd34ea7a99aecd68dd6d859de8",
+   "title": "IMG_1002.jpg",
+   "mimeType": "image/jpeg",
+   "parentId": "1969f5bc85b12f6e9e92ef7363e461c3a",
+   "createdTime": "2026-07-02T09:00:00Z",
+   "modifiedTime": "2026-06-22T15:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 2002222,
+   "content_key": "img1002"
+  },
+  {
+   "id": "1da87335cc2fc020b3ce48c439c8d1940",
+   "title": "IMG_1003.jpg",
+   "mimeType": "image/jpeg",
+   "parentId": "1969f5bc85b12f6e9e92ef7363e461c3a",
+   "createdTime": "2026-07-03T09:00:00Z",
+   "modifiedTime": "2026-06-23T15:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 2003333,
+   "content_key": "img1003"
+  },
+  {
+   "id": "111f4a2d0e7567e0f0aa70ad40100d070",
+   "title": "IMG_1004.jpg",
+   "mimeType": "image/jpeg",
+   "parentId": "1969f5bc85b12f6e9e92ef7363e461c3a",
+   "createdTime": "2026-07-04T09:00:00Z",
+   "modifiedTime": "2026-06-24T15:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 2004444,
+   "content_key": "img1004"
+  },
+  {
+   "id": "155b0397e14078aa2e52a7df94a2c625f",
+   "title": "IMG_1005.jpg",
+   "mimeType": "image/jpeg",
+   "parentId": "1969f5bc85b12f6e9e92ef7363e461c3a",
+   "createdTime": "2026-07-05T09:00:00Z",
+   "modifiedTime": "2026-06-25T15:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 2005555,
+   "content_key": "img1005"
+  },
+  {
+   "id": "1c453d4dac7481deca3c3373aaebb485d",
+   "title": "IMG_1003 (1).jpg",
+   "mimeType": "image/jpeg",
+   "parentId": "1969f5bc85b12f6e9e92ef7363e461c3a",
+   "createdTime": "2026-07-20T09:00:00Z",
+   "modifiedTime": "2026-06-23T15:00:00Z",
+   "owner": "writer@example.com",
+   "binary": true,
+   "size": 2003333,
+   "content_key": "img1003"
+  },
+  {
+   "id": "1a7cf329ade2b49d70aa7231adf1dfce4",
+   "title": "package.json",
+   "mimeType": "application/json",
+   "parentId": "11503aaba1660532ebab787219ffc8901",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com",
+   "content": "{\"name\": \"tool-app\", \"version\": \"1.0.0\"}"
+  },
+  {
+   "id": "19332beb9f2b733ebcf3eb6f6a00f3dce",
+   "title": "README.md",
+   "mimeType": "text/markdown",
+   "parentId": "11503aaba1660532ebab787219ffc8901",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com",
+   "content": "# tool-app\n\n小さな変換ツール。\n"
+  },
+  {
+   "id": "12c330cc952c40b93879ff08f0a45f058",
+   "title": "index.js",
+   "mimeType": "text/javascript",
+   "parentId": "1e7a6b2cd61003f3c3b5b7791d24382b6",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com",
+   "content": "import { run } from './util.js';\nrun();\n"
+  },
+  {
+   "id": "14f20876afc30d9fd11bb59f3666e95c1",
+   "title": "util.js",
+   "mimeType": "text/javascript",
+   "parentId": "1e7a6b2cd61003f3c3b5b7791d24382b6",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com",
+   "content": "export function run() { return 1; }\n"
+  },
+  {
+   "id": "118086ceb22271fd8ea591247a318ae99",
+   "title": "lodash",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "138710b9d86bfe68ba6feb0e8c0cf92e0",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1425723a31469715b41d881f5a0af1da0",
+   "title": "README.md",
+   "mimeType": "text/markdown",
+   "parentId": "118086ceb22271fd8ea591247a318ae99",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "# lodash\n\nnpm package.\n"
+  },
+  {
+   "id": "13f3d566526d2141abb0511967f2f3dd6",
+   "title": "package.json",
+   "mimeType": "application/json",
+   "parentId": "118086ceb22271fd8ea591247a318ae99",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "{\"name\": \"lodash\"}"
+  },
+  {
+   "id": "172ec7c81b96e6351f2e8a1fd143bed7c",
+   "title": "index.js",
+   "mimeType": "text/javascript",
+   "parentId": "118086ceb22271fd8ea591247a318ae99",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "module.exports = {};\n"
+  },
+  {
+   "id": "10352ee3d33d92b9be38cdc3cf16ee489",
+   "title": "LICENSE.md",
+   "mimeType": "text/markdown",
+   "parentId": "118086ceb22271fd8ea591247a318ae99",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "MIT License\n"
+  },
+  {
+   "id": "1e08d4eaf48121b7b3513ecd72a38eb6c",
+   "title": "semver",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "138710b9d86bfe68ba6feb0e8c0cf92e0",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "196a4a1ffcbc1cc38f358941d7d05e2bb",
+   "title": "README.md",
+   "mimeType": "text/markdown",
+   "parentId": "1e08d4eaf48121b7b3513ecd72a38eb6c",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "# semver\n\nnpm package.\n"
+  },
+  {
+   "id": "134a9c49e04bc80109b46a3707f320af8",
+   "title": "package.json",
+   "mimeType": "application/json",
+   "parentId": "1e08d4eaf48121b7b3513ecd72a38eb6c",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "{\"name\": \"semver\"}"
+  },
+  {
+   "id": "11cb584d9ab65d691a8ac191310ac12b5",
+   "title": "index.js",
+   "mimeType": "text/javascript",
+   "parentId": "1e08d4eaf48121b7b3513ecd72a38eb6c",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "module.exports = {};\n"
+  },
+  {
+   "id": "1be48c6e39598f6bef8472d956f4bc3c0",
+   "title": "LICENSE.md",
+   "mimeType": "text/markdown",
+   "parentId": "1e08d4eaf48121b7b3513ecd72a38eb6c",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "MIT License\n"
+  },
+  {
+   "id": "1a4f619b151a0a1e8d20af908486f969f",
+   "title": "chalk",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "138710b9d86bfe68ba6feb0e8c0cf92e0",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "12d5c9fbd15527ddfde676d042ff09d1f",
+   "title": "README.md",
+   "mimeType": "text/markdown",
+   "parentId": "1a4f619b151a0a1e8d20af908486f969f",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "# chalk\n\nnpm package.\n"
+  },
+  {
+   "id": "15b43aa3a99d10d1564fe0a515218b948",
+   "title": "package.json",
+   "mimeType": "application/json",
+   "parentId": "1a4f619b151a0a1e8d20af908486f969f",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "{\"name\": \"chalk\"}"
+  },
+  {
+   "id": "12577a351d214859079a76e5705bed685",
+   "title": "index.js",
+   "mimeType": "text/javascript",
+   "parentId": "1a4f619b151a0a1e8d20af908486f969f",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "module.exports = {};\n"
+  },
+  {
+   "id": "1f4be1eaa427a0133442f062f044e9d14",
+   "title": "LICENSE.md",
+   "mimeType": "text/markdown",
+   "parentId": "1a4f619b151a0a1e8d20af908486f969f",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "MIT License\n"
+  },
+  {
+   "id": "1d5513ca4d68b521ffd442deba805a538",
+   "title": "commander",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "138710b9d86bfe68ba6feb0e8c0cf92e0",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1f78ce879ebb930c91c575d0306c3971a",
+   "title": "README.md",
+   "mimeType": "text/markdown",
+   "parentId": "1d5513ca4d68b521ffd442deba805a538",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "# commander\n\nnpm package.\n"
+  },
+  {
+   "id": "16f46a229399c49af8de0cebac9ea4fb6",
+   "title": "package.json",
+   "mimeType": "application/json",
+   "parentId": "1d5513ca4d68b521ffd442deba805a538",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "{\"name\": \"commander\"}"
+  },
+  {
+   "id": "1714f5ed09cc9c948a9bd7f3cf7590c83",
+   "title": "index.js",
+   "mimeType": "text/javascript",
+   "parentId": "1d5513ca4d68b521ffd442deba805a538",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "module.exports = {};\n"
+  },
+  {
+   "id": "131a0baec0306c38cfa1548fb1348be89",
+   "title": "LICENSE.md",
+   "mimeType": "text/markdown",
+   "parentId": "1d5513ca4d68b521ffd442deba805a538",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "MIT License\n"
+  },
+  {
+   "id": "167ff6a11755c0fe7e0d63675b5d9c0e3",
+   "title": "minimist",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "138710b9d86bfe68ba6feb0e8c0cf92e0",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-05-02T10:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "1cb0d7cca2e6c3ac169a87a4c4895d191",
+   "title": "README.md",
+   "mimeType": "text/markdown",
+   "parentId": "167ff6a11755c0fe7e0d63675b5d9c0e3",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "# minimist\n\nnpm package.\n"
+  },
+  {
+   "id": "1d0cde4653b4b2239197c91ce48d78650",
+   "title": "package.json",
+   "mimeType": "application/json",
+   "parentId": "167ff6a11755c0fe7e0d63675b5d9c0e3",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "{\"name\": \"minimist\"}"
+  },
+  {
+   "id": "12f8fb79bb36bc87a23ae05785b4b35c3",
+   "title": "index.js",
+   "mimeType": "text/javascript",
+   "parentId": "167ff6a11755c0fe7e0d63675b5d9c0e3",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "module.exports = {};\n"
+  },
+  {
+   "id": "19f9698b82c2146f3c6cd2f1c37d91973",
+   "title": "LICENSE.md",
+   "mimeType": "text/markdown",
+   "parentId": "167ff6a11755c0fe7e0d63675b5d9c0e3",
+   "createdTime": "2026-05-02T10:00:00Z",
+   "modifiedTime": "2026-06-05T09:40:43Z",
+   "owner": "writer@example.com",
+   "content": "MIT License\n"
+  },
+  {
+   "id": "16d34b3c9b18bb32c3c2dcac845171c6f",
+   "title": "共有_課題.pdf",
+   "mimeType": "application/pdf",
+   "parentId": "0AROOTcreativeFixture000000000000",
+   "createdTime": "2026-09-01T09:00:00Z",
+   "modifiedTime": "2026-09-01T09:00:00Z",
+   "owner": "teacher@school.example",
+   "binary": true,
+   "size": 300000,
+   "text": "課題プリント\n",
+   "content_key": "kadai"
+  },
+  {
+   "id": "16f38295be3eed9a08f096df834b03fbb",
+   "title": "_drive-organizer-logs",
+   "mimeType": "application/vnd.google-apps.folder",
+   "parentId": "0AROOTcreativeFixture000000000000",
+   "createdTime": "2026-09-01T09:00:00Z",
+   "modifiedTime": "2026-09-01T09:00:00Z",
+   "owner": "writer@example.com"
+  },
+  {
+   "id": "19d1c9c10328c15e0b9aab5b0d97c47fd",
+   "title": "2026-09-01_0900_drive-organizer.md",
+   "mimeType": "text/markdown",
+   "parentId": "16f38295be3eed9a08f096df834b03fbb",
+   "createdTime": "2026-09-01T09:05:00Z",
+   "modifiedTime": "2026-09-01T09:05:00Z",
+   "owner": "writer@example.com",
+   "content": "# 作業ログ（2026-09-01 09:00）\n\n```yaml\ndrive_organizer_state:\n  version: 1\n  last_scan: 2026-09-01T09:00:00Z\n  last_full_scan: 2026-09-01T09:00:00Z\n  scope:\n    - {id: 1c581ef7a1b295aeaa862be5da3283bbd, path: マイドライブ/創作}\n    - {id: 1fd85f25d1f01270d69f02690949d5d64, path: マイドライブ/未整理}\n  open_items: []\n  pending: []\n  declined: []\n```\n\n- 初回の全体調査。詳細は 2026-09-15 のログに引き継ぎ。\n"
+  },
+  {
+   "id": "16aeacbc8740a67fd3e724b74850ab55d",
+   "title": "2026-09-15_0900_drive-organizer.md",
+   "mimeType": "text/markdown",
+   "parentId": "16f38295be3eed9a08f096df834b03fbb",
+   "createdTime": "2026-09-15T09:05:00Z",
+   "modifiedTime": "2026-09-15T09:05:00Z",
+   "owner": "writer@example.com",
+   "content": "# 作業ログ（2026-09-15 09:00）\n\n```yaml\ndrive_organizer_state:\n  version: 1\n  last_scan: 2026-09-15T09:00:00Z\n  last_full_scan: 2026-09-01T09:00:00Z\n  scope:\n    - {id: 1c581ef7a1b295aeaa862be5da3283bbd, path: マイドライブ/創作}\n    - {id: 1fd85f25d1f01270d69f02690949d5d64, path: マイドライブ/未整理}\n  excluded_folders:\n    - {id: 138710b9d86bfe68ba6feb0e8c0cf92e0, path: マイドライブ/tool-app/node_modules, reason: コード依存フォルダ}\n    - {id: 1e45e52f9fa78af961f45f2c6b00316c3, path: マイドライブ/創作/Obsidian/.obsidian, reason: アプリ設定}\n  vaults:\n    - {id: 1a1c5f54fea4d826859eed452ecdd616e, path: マイドライブ/創作/Obsidian}\n  conventions:\n    人物: {filename: 人物名のみ, type: character, tags: [人物]}\n    章: {filename: 第NN章, type: chapter, tags: [本文]}\n    議事録: {filename: YYYY-MM-DD_定例会議, folder: マイドライブ/議事録}\n  open_items:\n    - {id: Q1, files: [1de2b5172913a69262487eee8b3e4900f, 1687728f161df8a371d91fdb5bf190699], issue: 最終版2 と 最新版 が互いにない内容を持つ（分岐）, since: 2026-09-15}\n    - {id: Q2, files: [19fefc9e8300e18487abb298f63ea3537], issue: アイデア断片.md がどの作品のメモか不明, since: 2026-09-15}\n  pending:\n    - {id: D1, action: trash, file: 18f139958aca223d2a24b8909c67ac8f5, keep: 17e5be921f0dbc022f3007209d16a02fd, planned_modified: 2026-07-10T11:20:00Z}\n  declined:\n    - {action: move, file: 15b771b773b07115918d74ba2ef1710b1, to: マイドライブ/創作/Obsidian, date: 2026-09-15}\n```\n\n## 整理案（承認待ち）\n- D1: 未整理/世界観.md をゴミ箱へ（Obsidian/設定/世界観.md と完全一致。確度 高）\n\n## 要確認\n- Q1: 六炎_第1部_最終版2 と 六炎_第1部_最新版 が分岐している\n- Q2: アイデア断片.md の所属\n\n## 実行しなかった変更\n- 資料/参考文献メモ.md の Vault への移動（ユーザーが却下）\n"
+  },
+  {
+   "id": "1865785fc4521697672dfc887b37f3567",
+   "title": "第03章 (1).md",
+   "mimeType": "text/markdown",
+   "parentId": "1fd85f25d1f01270d69f02690949d5d64",
+   "createdTime": "2026-09-20T08:00:00Z",
+   "modifiedTime": "2026-07-01T08:00:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: chapter\ntags:\n  - 本文\n---\n# 第03章 古文書の律\n\n古文書にはこうあった。「[[律術]]を修めし者、晶の声を畏れよ」。\n\n[[モーラ]]はその一節を指でなぞり、黙り込んだ。\n"
+  },
+  {
+   "id": "1755aa4269856927812eca9a5f7a7a4cb",
+   "title": "第04章.md",
+   "mimeType": "text/markdown",
+   "parentId": "17cdf18fd6f137cb5e87a9134264e1578",
+   "createdTime": "2026-09-22T08:00:00Z",
+   "modifiedTime": "2026-09-22T08:30:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: chapter\ntags:\n  - 本文\n---\n# 第04章 遺物市の裏\n\n[[キャラ_カルタ]]は戸板の裏で静守会の使いと目を合わせ、すぐに逸らした。\n\n[[ペトロス]]だけが、その一瞬を見ていた。\n"
+  },
+  {
+   "id": "1f2a5269390797e06fd12bac70fb019d9",
+   "title": "イェレナ.md",
+   "mimeType": "text/markdown",
+   "parentId": "11a58756f636a955bb693045217c8d5b4",
+   "createdTime": "2026-09-23T08:00:00Z",
+   "modifiedTime": "2026-09-23T08:10:00Z",
+   "owner": "writer@example.com",
+   "content": "---\ntype: character\ntags:\n  - 人物\n---\n# イェレナ\n\n鐘守衆の若い見習い。静守会の命令に疑問を抱き始めている。\n"
+  }
+ ]
+}
